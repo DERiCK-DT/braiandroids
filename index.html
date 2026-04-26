@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orçamento — Braiandroids</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Braiandroids</h1>
+      <p>Orçamento rápido</p>
+    </div>
+
+    <div class="container">
+      <input
+        class="search-box"
+        type="text"
+        id="busca"
+        placeholder="Buscar modelo... ex: A54, iPhone 14, Moto G84"
+        oninput="filtrar()"
+        autocomplete="off"
+      />
+
+      <div class="filters">
+        <div class="chip active" onclick="setFiltro('todos', this)">Todos</div>
+        <div class="chip" onclick="setFiltro('tela', this)">Tela</div>
+        <div class="chip" onclick="setFiltro('bateria', this)">Bateria</div>
+      </div>
+
+      <div class="resultados" id="resultados">
+        <div class="loading">Carregando catálogo...</div>
+      </div>
+
+      <div class="orcamento" style="margin-top: 16px">
+        <div class="orc-header">
+          <h2>Orçamento</h2>
+          <button class="btn-limpar" onclick="limpar()">Limpar</button>
+        </div>
+        <div id="orc-body">
+          <div class="orc-vazio">
+            Adicione peças acima para montar o orçamento.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

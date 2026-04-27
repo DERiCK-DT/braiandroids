@@ -165,6 +165,10 @@ function renderOrcamento() {
   }
 
   const total = orcamento.reduce((s, p) => s + calcular(p).total, 0);
+  const descontoTotal = orcamento.reduce((s, p) => {
+    const c = calcular(p);
+    return s + c.taxaCartao + c.erro + (c.gift || 0);
+  }, 0);
 
   body.innerHTML =
     orcamento
@@ -187,5 +191,11 @@ function renderOrcamento() {
       </div>`;
       })
       .join("") +
-    `<div class="orc-total"><span>Total</span><span>${fmt(total)}</span></div>`;
+    `<div class="orc-total">
+  <span>Total</span>
+  <span>${fmt(total)}</span>
+</div>
+<div style="text-align: right; padding: 8px 14px; font-size: 13px; color: #c0392b; background: #fdf0f0; border-top: 1px solid #f0f0f0;">
+  Desconto máx total: ${fmt(descontoTotal)}
+</div>`;
 }

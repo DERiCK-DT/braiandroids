@@ -101,6 +101,10 @@ body {
   background: #eaf3de;
   color: #27500a;
 }
+.cat-dock {
+  background: #faeeda;
+  color: #633806;
+}
 .item-preco {
   font-size: 15px;
   font-weight: 600;

@@ -22,6 +22,13 @@ function moBateria(vp) {
   return 300;
 }
 
+function moDock(vp) {
+  if (vp < 80) return 80;
+  if (vp < 110) return 90;
+  if (vp < 190) return 120;
+  return 360;
+}
+
 function calcTela(vp) {
   const mo = moTela(vp);
   const erro = vp * 0.18;
@@ -38,10 +45,17 @@ function calcBateria(vp) {
   return { mo, erro, sub, total, taxaCartao: sub * 0.1, gift: 0 };
 }
 
+function calcDock(vp) {
+  const mo = moDock(vp);
+  const erro = vp * 0.18;
+  const total = vp + mo + erro;
+  return { mo, erro, total, taxaCartao: total * 0.1, gift: 0 };
+}
+
 function calcular(item) {
-  return item.categoria === "tela"
-    ? calcTela(item.valor)
-    : calcBateria(item.valor);
+  if (item.categoria === "tela") return calcTela(item.valor);
+  if (item.categoria === "bateria") return calcBateria(item.valor);
+  if (item.categoria === "dock") return calcDock(item.valor);
 }
 
 // ── Formatação ───────────────────────────────────────────────

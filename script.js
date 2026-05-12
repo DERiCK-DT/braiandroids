@@ -60,15 +60,15 @@ function calcular(item) {
 
 // ── Formatação ───────────────────────────────────────────────
 function fmt(v) {
+  const arredondado = Math.round(v / 10) * 10;
   return (
     "R$ " +
-    v
+    arredondado
       .toFixed(2)
       .replace(".", ",")
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   );
 }
-
 // ── Carregar CSV ─────────────────────────────────────────────
 fetch(CSV_URL)
   .then((r) => {

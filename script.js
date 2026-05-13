@@ -29,6 +29,14 @@ function moDock(vp) {
   return 360;
 }
 
+function moTampa(vp) {
+  if (vp < 100) return 100;
+  if (vp < 200) return 180;
+  if (vp < 320) return 280;
+  if (vp < 600) return 380;
+  return 550;
+}
+
 function calcTela(vp) {
   const mo = moTela(vp);
   const erro = vp * 0.18;
@@ -52,10 +60,20 @@ function calcDock(vp) {
   return { mo, erro, total, taxaCartao: total * 0.1, gift: 0 };
 }
 
+function calcTampa(vp, adicional = 0) {
+  const mo = moTampa(vp);
+  const totalParcial = vp + mo + adicional;
+  const total = totalParcial * 1.15;
+  const taxaCartao = totalParcial * 0.1;
+  const taxaErro = totalParcial * 0.05;
+  return { mo, totalParcial, total, taxaCartao, taxaErro, gift: 0 };
+}
+
 function calcular(item) {
   if (item.categoria === "tela") return calcTela(item.valor);
   if (item.categoria === "bateria") return calcBateria(item.valor);
   if (item.categoria === "dock") return calcDock(item.valor);
+  if (item.categoria === "tampa") return calcTampa(item.valor);
 }
 
 // ── Formatação ───────────────────────────────────────────────
@@ -181,35 +199,57 @@ function renderOrcamento() {
   const total = orcamento.reduce((s, p) => s + calcular(p).total, 0);
   const descontoTotal = orcamento.reduce((s, p) => {
     const c = calcular(p);
-    return s + c.taxaCartao + c.erro + (c.gift || 0);
+    return s + c.taxaCartao + (c.taxaErro || c.erro || 0) + (c.gift || 0);
   }, 0);
 
   body.innerHTML =
     orcamento
       .map((p, i) => {
-        const c = calcular(p);
-        const maxDesc = c.taxaCartao + c.erro + (c.gift || 0);
-        return `<div class="orc-item">
+        const ehIphoneTampa =
+          p.categoria === "tampa" && p.modelo.toLowerCase().includes("iphone");
+
+        if (ehIphoneTampa) {
+          const cNormal = calcTampa(p.valor, 0);
+          const cPrimeira = calcTampa(p.valor, 100);
+          const maxDesc = cNormal.taxaCartao + cNormal.taxaErro;
+          return `<div class="orc-item">
         <div class="orc-item-top">
           <div>
             <span class="orc-item-nome">${p.modelo}</span>
-            <span class="item-cat cat-${p.categoria}" style="margin-left:8px">${p.categoria}</span>
+            <span class="item-cat cat-tampa" style="margin-left:8px">tampa</span>
           </div>
-          <div style="display:flex;align-items:center">
-            <span class="orc-item-final">${fmt(c.total)}</span>
-            <button class="btn-rm" onclick="remover(${i})">×</button>
-          </div>
+          <button class="btn-rm" onclick="remover(${i})">×</button>
         </div>
-        <div class="orc-item-det">Peça: ${fmt(p.valor)} · MO: ${fmt(c.mo)} · Erro: ${fmt(c.erro)}${c.gift ? " · Gift: " + fmt(c.gift) : ""}</div>
-        <div class="orc-item-desc">Desconto máx disponível: ${fmt(maxDesc)}</div>
+        <div class="orc-item-det" style="margin-top:6px">
+          Já trocada: <strong>${fmt(cNormal.total)}</strong>
+          &nbsp;·&nbsp;
+          1ª troca: <strong>${fmt(cPrimeira.total)}</strong>
+        </div>
+        <div class="orc-item-desc">Desconto máx: ${fmt(maxDesc)}</div>
       </div>`;
+        }
+
+        const c = calcular(p);
+        const maxDesc =
+          c.taxaCartao + (c.taxaErro || c.erro || 0) + (c.gift || 0);
+        return `<div class="orc-item">
+      <div class="orc-item-top">
+        <div>
+          <span class="orc-item-nome">${p.modelo}</span>
+          <span class="item-cat cat-${p.categoria}" style="margin-left:8px">${p.categoria}</span>
+        </div>
+        <div style="display:flex;align-items:center">
+          <span class="orc-item-final">${fmt(c.total)}</span>
+          <button class="btn-rm" onclick="remover(${i})">×</button>
+        </div>
+      </div>
+      <div class="orc-item-det">Peça: ${fmt(p.valor)} · MO: ${fmt(c.mo)}</div>
+      <div class="orc-item-desc">Desconto máx: ${fmt(maxDesc)}</div>
+    </div>`;
       })
       .join("") +
-    `<div class="orc-total">
-  <span>Total</span>
-  <span>${fmt(total)}</span>
-</div>
-<div style="text-align: right; padding: 8px 14px; font-size: 13px; color: #c0392b; background: #fdf0f0; border-top: 1px solid #f0f0f0;">
-  Desconto máx total: ${fmt(descontoTotal)}
-</div>`;
+    `<div class="orc-total"><span>Total</span><span>${fmt(total)}</span></div>
+   <div style="padding:8px 14px;font-size:13px;color:#c0392b;background:#fdf0f0;border-top:1px solid #f0f0f0;">
+     Desconto máx total: ${fmt(descontoTotal)}
+   </div>`;
 }

@@ -253,3 +253,31 @@ function renderOrcamento() {
      Desconto máx total: ${fmt(descontoTotal)}
    </div>`;
 }
+
+function copiarOrcamento() {
+  const linhas = orcamento.map((p) => {
+    if (p.categoria === "tampa" && p.modelo.toLowerCase().includes("iphone")) {
+      const cNormal = calcTampa(p.valor, 0);
+      const cPrimeira = calcTampa(p.valor, 100);
+      return `*${p.modelo}* (Tampa)\n  Já trocada: ${fmt(cNormal.total)}\n  1ª troca: ${fmt(cPrimeira.total)}`;
+    }
+    const c = calcular(p);
+    return `*${p.modelo}* (${p.categoria}): ${fmt(c.total)}`;
+  });
+
+  const total = orcamento.reduce((s, p) => s + calcular(p).total, 0);
+  const descontoTotal = orcamento.reduce((s, p) => {
+    const c = calcular(p);
+    return s + c.taxaCartao + (c.taxaErro || c.erro || 0) + (c.gift || 0);
+  }, 0);
+
+  const texto =
+    linhas.join("\n") +
+    `\n\nTotal: ${fmt(total)}\nDesconto máx: ${fmt(descontoTotal)}`;
+
+  navigator.clipboard.writeText(texto).then(() => {
+    const btn = document.getElementById("btn-copiar");
+    btn.textContent = "✓ Copiado!";
+    setTimeout(() => (btn.textContent = "Copiar orçamento"), 2000);
+  });
+}

@@ -211,7 +211,7 @@ function renderOrcamento() {
       return nome
         .toLowerCase()
         .replace(
-          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco)\s+/i,
+          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco|galaxy|infinix|tecno spark|tecno|motorola|redmi|redmi note|note)\s+/i,
           "",
         )
         .split(termosTecnicos)[0]
@@ -310,7 +310,7 @@ function copiarOrcamento() {
       return nome
         .toLowerCase()
         .replace(
-          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco|galaxy|infinix|tecno spark|tecno|motorola)\s+/i,
+          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco|galaxy|infinix|tecno spark|tecno|motorola|redmi|redmi note|note)\s+/i,
           "",
         ) // Remove a marca no início
         .split(termosTecnicos)[0] // Remove o termo técnico
@@ -447,7 +447,7 @@ function copiarAvista() {
       return nome
         .toLowerCase()
         .replace(
-          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco|galaxy|infinix|tecno spark|tecno|motorola)\s+/i,
+          /^(moto|samsung|iphone|xiaomi|asus|lg|lenovo|realme|poco|galaxy|infinix|tecno spark|tecno|motorola|redmi|redmi note|note)\s+/i,
           "",
         ) // Remove a marca
         .split(termosTecnicos)[0] // Remove o termo técnico

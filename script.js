@@ -285,7 +285,7 @@ function renderOrcamento() {
       })
       .join("") +
     `<div class="orc-total"><span>Total Somado</span><span>${fmt(total)}</span></div>
-   <div style="padding:8px 14px;font-size:13px;color:#c0392b;background:#fdf0f0;border-top:1px solid #f0f0f0;">
+   <div style="padding:8px 14px;font-size:13px;color:#ba2527;background:#f8fafc;border-top:1px solid #e2e8f0;font-weight:500;">
      Desconto máx total: ${fmt(descontoTotal)}
    </div>`;
 }

@@ -3,81 +3,104 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: system-ui, sans-serif;
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: #cbd5e1; /* Cinza médio fosco: elimina toda a luz estourada de fundo */
+  color: #0f172a; /* Texto escuro de altíssima leitura */
 }
 
+/* ── HEADER TECH REFINADO ────────────────────────────────── */
+/* ── HEADER TECH REFINADO E CENTRALIZADO ────────────────── */
 .header {
-  background: #1a1a1a;
-  color: white;
-  padding: 16px 20px;
+  background: #94a3b8; /* Topo cinza fechado e corporativo */
+  color: #0f172a;
+  padding: 20px 16px;
+  border-bottom: 2px solid #007791; /* Azul profundo tech */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center; /* Centraliza todo o texto do cabeçalho */
 }
 .header h1 {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 .header p {
-  font-size: 13px;
-  color: #888;
-  margin-top: 2px;
+  font-size: 12px;
+  color: #334155;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
 .container {
   max-width: 700px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 20px 16px;
 }
 
+/* ── INPUTS DE BUSCA ────────────────────────────────────── */
 .search-box {
   width: 100%;
-  padding: 12px 14px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: white;
-  margin-bottom: 10px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #0f172a;
+  border: 1px solid #64748b;
+  border-radius: 8px;
+  background: #e2e8f0; /* Caixa de busca cinza suave */
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
 }
 .search-box:focus {
   outline: none;
-  border-color: #1a1a1a;
+  border-color: #007791;
+  box-shadow: 0 0 8px rgba(0, 119, 145, 0.2);
 }
 
+/* ── CHIPS / FILTROS ────────────────────────────────────── */
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   flex-wrap: wrap;
 }
 .chip {
   padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  border: 1px solid #ddd;
-  background: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #64748b;
+  background: #e2e8f0;
+  color: #334155;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+.chip:hover {
+  border-color: #334155;
+  color: #0f172a;
 }
 .chip.active {
-  background: #1a1a1a;
-  color: white;
-  border-color: #1a1a1a;
+  background: #007791;
+  color: #ffffff;
+  border-color: #007791;
+  font-weight: 600;
 }
 
+/* ── CARD DE RESULTADOS ─────────────────────────────────── */
 .resultados {
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  background: #e2e8f0; /* Fundo dos blocos em cinza suave e confortável */
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 .resultado-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 14px;
-  border-bottom: 1px solid #f0f0f0;
-  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #cbd5e1;
+  gap: 12px;
 }
 .resultado-item:last-child {
   border-bottom: none;
@@ -85,88 +108,116 @@ body {
 .item-nome {
   font-size: 14px;
   font-weight: 500;
+  color: #0f172a;
   flex: 1;
 }
+
+/* ── CATEGORIAS COM CORES SUTIS EM FUNDO CINZA ────────── */
 .item-cat {
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
   white-space: nowrap;
+  letter-spacing: 0.5px;
 }
 .cat-tela {
-  background: #e6f1fb;
-  color: #0c447c;
+  background: #94d2bd;
+  color: #005f73;
 }
 .cat-bateria {
-  background: #eaf3de;
-  color: #27500a;
+  background: #c7e5c4;
+  color: #1b4d22;
 }
 .cat-dock {
-  background: #faeeda;
-  color: #633806;
+  background: #fde2e4;
+  color: #7f4f24;
 }
 .cat-tampa {
-  background: #fbeaf0;
-  color: #72243e;
+  background: #ffccd5;
+  color: #800f2f;
 }
+
 .item-preco {
   font-size: 15px;
   font-weight: 600;
+  color: #0f172a;
   white-space: nowrap;
 }
+
+/* ── BOTÕES INTERATIVOS ─────────────────────────────────── */
 .btn-add {
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: white;
-  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #64748b;
+  background: #cbd5e1;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 .btn-add:hover {
-  background: #f5f5f5;
+  background: #007791;
+  color: #ffffff;
+  border-color: #007791;
 }
 .ja-add {
   font-size: 12px;
-  color: #999;
+  color: #475569;
+  font-weight: 600;
 }
 
 .vazio {
   text-align: center;
-  padding: 32px;
-  color: #999;
+  padding: 40px;
+  color: #475569;
   font-size: 14px;
 }
 
+/* ── SEÇÃO ORÇAMENTO (O BLOCO DE FECHAMENTO) ─────────────── */
 .orcamento {
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  background: #e2e8f0;
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
   overflow: hidden;
 }
 .orc-header {
-  padding: 12px 14px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 14px;
+  border-bottom: 1px solid #94a3b8;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #cbd5e1;
 }
 .orc-header h2 {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #334155;
+  letter-spacing: 0.5px;
 }
 .btn-limpar {
-  font-size: 12px;
-  color: #999;
-  background: none;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #ba2527;
+  border: 1px solid #ba2527;
+  border-radius: 4px;
+  padding: 4px 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+.btn-limpar:hover {
+  background: #8a1c1e;
+}
+
 .orc-item {
-  padding: 10px 14px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 12px 14px;
+  border-bottom: 1px solid #cbd5e1;
+  background: #e2e8f0;
 }
 .orc-item:last-child {
   border-bottom: none;
@@ -179,54 +230,63 @@ body {
 .orc-item-nome {
   font-size: 14px;
   font-weight: 500;
+  color: #0f172a;
 }
 .orc-item-final {
   font-size: 15px;
   font-weight: 600;
+  color: #0f172a;
 }
 .orc-item-det {
   font-size: 12px;
-  color: #888;
-  margin-top: 3px;
+  color: #475569;
+  margin-top: 4px;
 }
 .orc-item-desc {
   font-size: 12px;
-  color: #c0392b;
-  margin-top: 2px;
+  color: #ba2527;
+  margin-top: 4px;
   text-align: right;
+  font-weight: 600;
 }
 .btn-rm {
   background: none;
   border: none;
   cursor: pointer;
-  color: #bbb;
+  color: #475569;
   font-size: 18px;
   margin-left: 10px;
 }
+.btn-rm:hover {
+  color: #ba2527;
+}
+
+/* ── FOOTER DO ORÇAMENTO ────────────────────────────────── */
 .orc-total {
-  padding: 14px;
-  border-top: 1px solid #ddd;
-  background: #f9f9f9;
+  padding: 16px 14px;
+  border-top: 1px solid #94a3b8;
+  background: #cbd5e1;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #005f73;
 }
 .orc-vazio {
-  padding: 24px;
+  padding: 30px;
   text-align: center;
-  color: #aaa;
+  color: #475569;
   font-size: 14px;
 }
 
 .loading {
   text-align: center;
   padding: 40px;
-  color: #999;
+  color: #007791;
 }
 .erro {
   text-align: center;
   padding: 24px;
-  color: #c0392b;
+  color: #ba2527;
   font-size: 14px;
 }

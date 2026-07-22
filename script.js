@@ -23,7 +23,8 @@ function moBateria(vp) {
 }
 
 function moDock(vp) {
-  if (vp < 80) return 80;
+  if (vp < 50) return 100;
+  if (vp < 80) return 120;
   if (vp < 110) return 90;
   if (vp < 190) return 120;
   return 360;
